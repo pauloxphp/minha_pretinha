@@ -160,19 +160,30 @@ mas sei que enquanto eu puder escolher,
 eu escolho você.`;
 
     const typingEl = document.getElementById("typing");
-    let i = 0;
+  let i = 0;
 
-    function type() {
-      if (i <= text.length) {
-        typingEl.innerHTML = text.slice(0, i) + '<span class="cursor"></span>';
-        i++;
-        setTimeout(type, 40); // velocidade da digitação
-      } else {
-        typingEl.innerHTML = text + '<span class="cursor"></span>';
-      }
+  function autoScroll() {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  }
+
+  function type() {
+    if (i <= text.length) {
+      typingEl.innerHTML = text.slice(0, i) + '<span class="cursor"></span>';
+      i++;
+
+      // rola a tela sempre que o texto cresce
+      autoScroll();
+
+      setTimeout(type, 40); // velocidade da digitação
+    } else {
+      typingEl.innerHTML = text + '<span class="cursor"></span>';
     }
+  }
 
-    type();
-  </script>
+  type();
+</script>
 </body>
 </html>
